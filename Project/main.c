@@ -6,7 +6,7 @@
 #include "submenu.h"
 // la opción delete_product manda llamar a este submenu
 
-
+#include "Agenda.h"
 
 int print_stock( void* params )
 {
