@@ -67,6 +67,24 @@ void SLL_Push_back( SLL* this, Contacto data ) {
 
 }
 
+void SLL_Pop_front( SLL* this )
+{
+   assert( this->first );
+   
+    if(this->len==1)
+    {
+        free(this->first);
+        this->first = this->last = this->cursor = NULL;
+    }
+    else
+    {
+   node* tmp = this->first->next;
+   free( this->first );
+   this->first = tmp;
+    }
+     --this->len;
+}
+
 size_t SLL_Len( SLL* this ) {
    return this->len;
 
