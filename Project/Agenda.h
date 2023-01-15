@@ -71,18 +71,18 @@ typedef struct
 DLL* DLL_New();
 void DLL_Delete( DLL** this );
 
-void DLL_Push_front( DLL* this, int item );
-void DLL_Push_back( DLL* this, int item );
-void DLL_Insert( DLL* this, int item );
+void DLL_Push_front( DLL* this, Evento item );
+void DLL_Push_back( DLL* this, Evento item );
+void DLL_Insert( DLL* this, Evento item );
 
 void DLL_Pop_front( DLL* this );
 void DLL_Pop_back( DLL* this );
 void DLL_Erase( DLL* this );
-void DLL_Remove( DLL* this, int key );
+void DLL_Remove( DLL* this, Evento* key );
 
 void DLL_MakeEmpty( DLL* this );
 
-bool DLL_Find( DLL* this, int key );
+bool DLL_Find_Event_by_name( DLL* this, char key[MAX_EVENT] );
 
 void DLL_Cursor_front( DLL* this );
 void DLL_Cursor_back( DLL* this );
@@ -96,6 +96,8 @@ size_t DLL_Len( DLL* this );
 
 void DLL_PrintStructure( DLL* this );
 
+DLL* DLL_Concat(DLL* list_1, DLL* list_2, int len);
+void DLL_mergesort(DLL* arr, int len);
 
 //----------------------------------------------------------------------
 //  Lista Simplemente enlazada para Contactos
@@ -117,7 +119,9 @@ typedef struct SLL
 SLL*   SLL_New();
 void   SLL_Delete(       SLL** this );
 void   SLL_Push_front(   SLL* this, Contacto data );
-void   SLL_Push_back(    SLL* this, Contacto data    );
+void   SLL_Push_back(    SLL* this, Contacto data );
+void   SLL_Insert(       SLL* this, Contacto data );
+int    SLL_Get(          SLL* this );
 void   SLL_Pop_front(    SLL* this );
 size_t SLL_Len(          SLL* this );
 bool   SLL_Is_empty(     SLL* this );
@@ -143,16 +147,16 @@ Agenda* Agenda_new();
 
 void   Agenda_Delete( Agenda** this );
 
-void   Agenda_add_date( Agenda* this, Fecha data );
+void   Agenda_add_date( Agenda* this, Evento data );
 void   Agenda_add_contact(Agenda* this, Contacto data );
 
 
-bool   Agenda_Is_empty( SLL* this );
-void   Agenda_Make_empty( SLL* this );
+bool   Agenda_Is_empty( Agenda* this );
+void   Agenda_Make_empty( Agenda* this );
 
-bool   Agenda_Find_Event( SLL* this, int key );
-bool   Agenda_Find_contacto( SLL* this, int key );
-int    Print_Agenda( SLL* this );
+bool   Agenda_Find_Evento( Agenda* this, Evento key );
+bool   Agenda_Find_contacto( Agenda* this, char key[MAX_CONTACTS]);
+void    Print_Agenda( Agenda* this );
 
 
 
