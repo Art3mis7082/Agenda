@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "contacts_dates.h": "c",
-        "agenda.h": "c",
-        "contactos.h": "c",
-        "stdio.h": "c",
-        "stdbool.h": "c"
-    }
-}
