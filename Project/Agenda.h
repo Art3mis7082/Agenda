@@ -35,7 +35,7 @@ void   Agenda_add_contact(Agenda* this, Contacto data );
 bool   Agenda_Is_empty( Agenda* this );
 void   Agenda_Make_empty( Agenda* this );
 
-bool   Agenda_Find_Evento( Agenda* this, Evento key );
+bool   Agenda_Find_Event( Agenda* this, Evento key );
 bool   Agenda_Find_contacto( Agenda* this, char key[MAX_CONTACTS]);
 void   Print_Agenda( Agenda* this );
 

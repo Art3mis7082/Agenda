@@ -14,19 +14,15 @@
 //------------------------------------------
 
 int print_calendar( void* params ) {
-    DummyClass* dummy_object = (DummyClass*) params;
+    Agenda* object = (Agenda*) params;
 
     printf( "print_calendar()\n" );
 
     // llama a un submenú:
     int salir = 0;
     do {
-        salir = submenu_calendar( dummy_object );
+        salir = submenu_calendar( object );
     } while( salir != 0 );
-
-    int cont = DummyClass_Get( dummy_object );
-    ++cont;
-    DummyClass_Set( dummy_object, cont );
 
     return 1;
     // puedes devolver lo que sea más conveniente a tu aplicación
@@ -37,19 +33,15 @@ int print_calendar( void* params ) {
 //------------------------------------------
 
 int option_dates( void* params ) {
-    DummyClass* dummy_object = (DummyClass*) params;
+    Agenda* object = (Agenda*) params;
 
-    printf( "option_dates(): %d\n", DummyClass_Get( dummy_object ) );
+    printf( "option_dates() \n" );
 
     // llama a un submenú:
     int salir = 0;
     do {
-        salir = submenu_event( dummy_object );
+        salir = submenu_event( object );
     } while( salir != 0 );
-
-    int cont = DummyClass_Get( dummy_object );
-    ++cont;
-    DummyClass_Set( dummy_object, cont );
 
     return 2;
 }
@@ -60,19 +52,15 @@ int option_dates( void* params ) {
 //------------------------------------------
 
 int option_contacts( void* params ) {
-    DummyClass* dummy_object = (DummyClass*) params;
+    Agenda* object = (Agenda*) params;
 
-    printf( "option_date(): %d\n", DummyClass_Get( dummy_object ) );
+    printf( "option_date()\n" );
 
     // llama a un submenú:
     int salir = 0;
     do {
-        salir = submenu_contact( dummy_object );
+        salir = submenu_contact( object );
     } while( salir != 0 );
-
-    int cont = DummyClass_Get( dummy_object );
-    ++cont;
-    DummyClass_Set( dummy_object, cont );
 
     return 3;
 }
@@ -80,7 +68,7 @@ int option_contacts( void* params ) {
 
 #define MAIN_MENU_OPTIONS 4
 
-int main_menu( DummyClass* obj ) {
+int main_menu( Agenda* obj ) {
     /*
     * print_stock, insert_product y delete_product NO son objetos, son funciones 
     * que a su vez llamarían a las funciones del tipo abstracto (clase) correspondiente.
@@ -112,11 +100,11 @@ int main_menu( DummyClass* obj ) {
 
 
 int main() {
-    DummyClass* an_object = DummyClass_New();
+    Agenda* an_object = Agenda_new();
     // creamos al objeto principal de la aplicación
 
     do{;}while( main_menu( an_object ) != 0 );
     // inicia el procesamiento de los menús y le pasamos al objeto principal
 
-    DummyClass_Delete( &an_object );
+    Agenda_Delete( &an_object );
 }

@@ -103,16 +103,17 @@ void Menu_Set_Title( Menu* menu, char* title ) {
 // prototipos (están marcadas como "static", que en C significan privadas al módulo).
 
 static int suboption1( void* params ) {
-   DummyClass* dummy_object = (DummyClass*) params;
+   Agenda* object = (Agenda*) params;
 
-   printf( "Soy la subopción de calendario: %d\n", DummyClass_Get( dummy_object ) );
+   printf( "Soy la subopción de calendario \n" );
+   Print_Agenda( Agenda* object );
 
    return 1;
 }
 
 // esta función no utiliza los parámetros
 static int suboption2( void* params ) {
-   printf( "Soy la subopciones de contactos\n" );
+   printf( "Soy la subopción de contactos\n" );
 
    return 2;
    // no es a fuerza el valor 2, cualquier otro que te convenga está bien, pero ten cuidado con el cero,
