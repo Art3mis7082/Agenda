@@ -6,10 +6,11 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <string.h>
-#define MAX 25
+#define MAX_EVENT 25
+#define MAX_CONTACTS 1000
 
 //----------------------------------------------------------------------
-//  Fechas y Contactos
+//  Eventos 
 //----------------------------------------------------------------------
 
 typedef struct
@@ -21,31 +22,89 @@ typedef struct
 
 typedef struct
 {
-    char contact_name[MAX];
-    int phone_number;
-    
-} Contacto;
+    int hora;
+    int min;
+    int seg;
+}Hora;
 
 typedef struct
 {
+    char nombre[MAX_EVENT];
     Fecha f;
-    Contacto c;
-}Tipo;
+    Hora h;
+    
+}Evento;
+//----------------------------------------------------------------------
+//  Contactos 
+//----------------------------------------------------------------------
+
+typedef struct
+{
+    char contact_name[MAX_EVENT];
+    int phone_number;
+    
+} Contacto;
 
 //NO tienen operaciones, accesaremos directamente a los campos
 
 
 //----------------------------------------------------------------------
-//  Lista Simplemente enlazada
+//  Lista Doblemente enlazada para Eventos
 //----------------------------------------------------------------------
+typedef struct Node
+{
+	Evento datos;
 
-typedef struct Node {
-
-      Tipo data;
-      struct Node* prev;
-      struct Node* next;
+	struct Node* next;
+	struct Node* prev;
 } Node;
 
+typedef struct
+{
+	Node* first;
+	Node* last;
+	Node* cursor;
+	size_t len;
+} DLL;
+
+
+DLL* DLL_New();
+void DLL_Delete( DLL** this );
+
+int DLL_Front( DLL* this );
+int DLL_Back( DLL* this );
+
+void DLL_Push_front( DLL* this, int item );
+void DLL_Push_back( DLL* this, int item );
+void DLL_Insert( DLL* this, int item );
+
+void DLL_Remove( DLL* this, int key );
+
+void DLL_MakeEmpty( DLL* this );
+
+bool DLL_Find( DLL* this, int key );
+
+void DLL_Cursor_front( DLL* this );
+void DLL_Cursor_back( DLL* this );
+void DLL_Cursor_next( DLL* this );
+void DLL_Cursor_prev( DLL* this );
+bool DLL_Cursor_end( DLL* this );
+
+bool DLL_IsEmpty( DLL* this );
+size_t DLL_Len( DLL* this );
+
+
+void DLL_PrintStructure( DLL* this );
+
+
+//----------------------------------------------------------------------
+//  Lista Simplemente enlazada para Contactos
+//----------------------------------------------------------------------
+typedef struct Node_SLL
+{
+	Contacto data;
+	struct Node_SLL* next;
+} Node_SLL;
 
 typedef struct SLL
 {
@@ -56,23 +115,20 @@ typedef struct SLL
 } SLL;
 
 SLL*   SLL_New();
-void   SLL_Delete( SLL** this );
-
-void   SLL_Push_back( SLL* this, Tipo data );
-void   SLL_Insert( SLL* this, Tipo data );
-
-void   SLL_Pop_front( SLL* this );
-
-int    SLL_Get( SLL* this );
-size_t SLL_Len( SLL* this );
-
-bool   SLL_Is_empty( SLL* this );
-void   SLL_Make_empty( SLL* this );
-
+void   SLL_Delete(       SLL** this );
+void   SLL_Push_front(   SLL* this, int data );
+void   SLL_Push_back(    SLL* this, int data );
+void   SLL_Insert(       SLL* this, int data );
+int    SLL_Get(          SLL* this );
+void   SLL_Pop_front(    SLL* this );
+size_t SLL_Len(          SLL* this );
+bool   SLL_Is_empty(     SLL* this );
+void   SLL_Make_empty(   SLL* this );
 void   SLL_Cursor_front( SLL* this );
-void   SLL_Cursor_back( SLL* this );
-void   SLL_Cursor_next( SLL* this );
-bool   SLL_Find( SLL* this, int key );
+void   SLL_Cursor_back(  SLL* this );
+void   SLL_Cursor_next(  SLL* this );
+bool   SLL_Find_if(      SLL* this, int key );
+bool   SLL_Find(         SLL* this, int key );
 
 //----------------------------------------------------------------------
 //  AGENDA
@@ -80,7 +136,7 @@ bool   SLL_Find( SLL* this, int key );
 
 typedef struct
 {
-    SLL* list_fechas;
+    DLL* list_eventoss;
     SLL* list_contactos;
 } Agenda; 
 
