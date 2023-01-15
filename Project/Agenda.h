@@ -1,5 +1,5 @@
-#ifndef AGENDA_INC
-#define AGENDA_INC
+#ifndef AGENDA
+#define AGENDA
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,18 +65,19 @@ typedef struct
 	Node* last;
 	Node* cursor;
 	size_t len;
-} DLL
+} DLL;
+
 
 DLL* DLL_New();
 void DLL_Delete( DLL** this );
-
-int DLL_Front( DLL* this );
-int DLL_Back( DLL* this );
 
 void DLL_Push_front( DLL* this, int item );
 void DLL_Push_back( DLL* this, int item );
 void DLL_Insert( DLL* this, int item );
 
+void DLL_Pop_front( DLL* this );
+void DLL_Pop_back( DLL* this );
+void DLL_Erase( DLL* this );
 void DLL_Remove( DLL* this, int key );
 
 void DLL_MakeEmpty( DLL* this );
@@ -99,26 +100,24 @@ void DLL_PrintStructure( DLL* this );
 //----------------------------------------------------------------------
 //  Lista Simplemente enlazada para Contactos
 //----------------------------------------------------------------------
-typedef struct Node_SLL
+typedef struct node
 {
 	Contacto data;
-	struct Node_SLL* next;
-} Node_SLL;
+	struct node* next;
+} node;
 
 typedef struct SLL
 {
-	Node* first;
-	Node* last;
-	Node* cursor;
+	node* first;
+	node* last;
+	node* cursor;
 	size_t len;
 } SLL;
 
 SLL*   SLL_New();
 void   SLL_Delete(       SLL** this );
-void   SLL_Push_front(   SLL* this, int data );
-void   SLL_Push_back(    SLL* this, int data );
-void   SLL_Insert(       SLL* this, int data );
-int    SLL_Get(          SLL* this );
+void   SLL_Push_front(   SLL* this, Contacto data );
+void   SLL_Push_back(    SLL* this, Contacto data    );
 void   SLL_Pop_front(    SLL* this );
 size_t SLL_Len(          SLL* this );
 bool   SLL_Is_empty(     SLL* this );
@@ -126,15 +125,16 @@ void   SLL_Make_empty(   SLL* this );
 void   SLL_Cursor_front( SLL* this );
 void   SLL_Cursor_back(  SLL* this );
 void   SLL_Cursor_next(  SLL* this );
-bool   SLL_Find_if(      SLL* this, int key );
-bool   SLL_Find(         SLL* this, int key );
+bool   SLL_Find(         SLL* this, Contacto key );
+void SLL_PrintStructure( SLL* this );
+
 //----------------------------------------------------------------------
 //  AGENDA
 //----------------------------------------------------------------------
 
 typedef struct
 {
-    DLL* list_eventoss;
+    DLL* list_eventos;
     SLL* list_contactos;
 } Agenda; 
 
@@ -150,7 +150,7 @@ void   Agenda_add_contact(Agenda* this, Contacto data );
 bool   Agenda_Is_empty( SLL* this );
 void   Agenda_Make_empty( SLL* this );
 
-bool   Agenda_Find_fecha( SLL* this, int key );
+bool   Agenda_Find_Event( SLL* this, int key );
 bool   Agenda_Find_contacto( SLL* this, int key );
 int    Print_Agenda( SLL* this );
 
