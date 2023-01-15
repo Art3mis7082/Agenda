@@ -1,33 +1,50 @@
 #include <stdio.h>
 
 #include "menu.h"
-#include "Class.h"
+#include "agenda.h"
 
-#include "submenu.h"
-// la opción delete_product manda llamar a este submenu
+#include "contactos.h"
+#include "fechas.h"
+#include "contactos.h"
 
-#include "Agenda.h"
+//#include "Agenda.h"
+
+//------------------------------------------
+// Imprimir calendario de un solo mes
+//------------------------------------------
 
 int print_calendar( void* params ) {
     DummyClass* dummy_object = (DummyClass*) params;
 
-    printf( "print_stock()\n" );
-    DummyClass_Print( dummy_object );
+    printf( "print_calendar()\n" );
 
+    // llama a un submenú:
+    int salir = 0;
+    do {
+        salir = submenu_calendar( dummy_object );
+    } while( salir != 0 );
+
+    int cont = DummyClass_Get( dummy_object );
+    ++cont;
+    DummyClass_Set( dummy_object, cont );
 
     return 1;
     // puedes devolver lo que sea más conveniente a tu aplicación
 }
 
-int insert_date( void* params ) {
+//------------------------------------------
+// Para eventos
+//------------------------------------------
+
+int option_dates( void* params ) {
     DummyClass* dummy_object = (DummyClass*) params;
 
-    printf( "insert_date(): %d\n", DummyClass_Get( dummy_object ) );
+    printf( "option_dates(): %d\n", DummyClass_Get( dummy_object ) );
 
     // llama a un submenú:
     int salir = 0;
     do {
-        salir = submenu1( dummy_object );
+        salir = submenu_event( dummy_object );
     } while( salir != 0 );
 
     int cont = DummyClass_Get( dummy_object );
@@ -37,37 +54,31 @@ int insert_date( void* params ) {
     return 2;
 }
 
-int delete_date( void* params ) {
+
+//------------------------------------------
+// Para contactos
+//------------------------------------------
+
+int option_contacts( void* params ) {
     DummyClass* dummy_object = (DummyClass*) params;
 
-    printf( "delete_date(): %d\n", DummyClass_Get( dummy_object ) );
+    printf( "option_date(): %d\n", DummyClass_Get( dummy_object ) );
 
     // llama a un submenú:
     int salir = 0;
     do {
-        salir = submenu1( dummy_object );
+        salir = submenu_contact( dummy_object );
     } while( salir != 0 );
+
+    int cont = DummyClass_Get( dummy_object );
+    ++cont;
+    DummyClass_Set( dummy_object, cont );
 
     return 3;
 }
 
-print_pendings( void* params ) {
-    DummyClass* dummy_object = (DummyClass*) params;
 
-    printf( "print_pendings(): %d\n", DummyClass_Get( dummy_object ) );
-
-    // llama a un submenú:
-    int salir = 0;
-    do {
-        salir = submenu1( dummy_object );
-    } while( salir != 0 );
-
-    return 4;
-
-}
-
-
-#define MAIN_MENU_OPTIONS 5
+#define MAIN_MENU_OPTIONS 4
 
 int main_menu( DummyClass* obj ) {
     /*
@@ -84,9 +95,9 @@ int main_menu( DummyClass* obj ) {
             (void*)obj           // le pasamos al objeto |obj| del tipo DummyClass
         },
 
-        { "Insertar un pendiente nuevo", insert_date, (void*)obj },
-        { "Eliminar un pendiente", delete_date, (void*)obj },
-        { "Ver pendientes", print_pendings, (void*)obj }
+        { "Eventos", option_dates, (void*)obj },
+        { "Contactos", option_contacts, (void*)obj }
+   
     };
 
     Menu* menu = Menu_New( main_menu_entries, MAIN_MENU_OPTIONS, "Agenda" );

@@ -1,172 +1,101 @@
-#include "Agenda.h"
-//------------------------------
-//  Operaciones Lista Enlazada
-//------------------------------
-static Node* new_Node( Tipo data ) {
-   Node* n = (Node*) malloc( sizeof( Node ) );
-   if( n ){
-      n->data = x;
-      n->next = NULL;
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <assert.h>
+#include <string.h>
+
+#define MAX_EVENT 25
+#define MAX_CONTACTS 1000
+
+#include "fechas.h"
+#include "contactos.h"
+#include "agenda.h"
+
+
+DummyClass* DummyClass_New() {
+   DummyClass* d = malloc( sizeof( DummyClass ) );
+   if( d ) {
+      d->some_var = 0;
    }
-   return n;
-}
-SLL* SLL_New() {
-    
-    SLL* sll= (SLL*) malloc(sizeof(SLL));
-    if( sll !=NULL ) {
-        fprintf(stderr,"New():Creando una lista nueva\n");
-        sll->first=sll->last=sll->cursor=NULL;
-        sll->len=0;
-    }
+
+   return d;
 }
 
-void SLL_Delete( SLL** this ) {
-    
-    assert( *this );
-    fprintf(stderr,"Delete():Borrando la lista\n");
-    SLL_Make_empty(*this);
-    free(*this);
-    *this=NULL;
+void DummyClass_Delete( DummyClass** d ) {
+   free( *d );
+   *d = NULL;
 }
 
-void SLL_Push_back( SLL* this, Tipo data ){
-    
-   Node* n = newNode( data );
-   if( n )
-   {
-      if( SLL_Is_empty( this ) )
-      {
-         this->first = this->last = this->cursor = n;
-      }
-      else{
-         this->last->next = n;
-         this->last = n;
-      }
-      ++this->len;
-   }
-}
-void   SLL_Insert( SLL* this, Tipo data ){
-    
-    assert(this);
-    assert( this->cursor);
-    fprintf(stderr,"Insert(): Insertando nuevo nodo a la derecha del cursor\n");
-    
-    Node* n=newNode(data);
-    Node* temp=this->cursor->next;
-    this->cursor->next=n;
-    this->cursor=n;
-    n->next=temp;
-    ++this->len;
-    
+void DummyClass_Print( DummyClass* d ) {
+   printf( "some_var = %d\n", d->some_var );
 }
 
-void   SLL_Pop_front( SLL* this ){
-    
-    assert( this->first );
-    if(this->len==1)
-    {
-        free(this->first);
-        this->first = this->last = this->cursor = NULL;
-    }
-    else
-    {
-   Node* tmp = this->first->next;
-   free( this->first );
-   this->first = tmp;
-    }
-     --this->len;
+void DummyClass_Set( DummyClass* d, int new_val ) {
+   d->some_var = new_val;
 }
 
-int    SLL_Get( SLL* this ){
-  
-   assert( this->first );
-   assert( this->cursor );
-   
-    return cursor->data;
+int DummyClass_Get( DummyClass* d ) {
+   return d->some_var;
 }
-
-size_t SLL_Len( SLL* this );
-
-bool   SLL_Is_empty( SLL* this ){
-     
-    assert( this );
-    return this->len==0;
-}
-void   SLL_Make_empty( SLL* this ){
-    
-    assert(this);
-    while(this->first != NULL)
-    {
-        SLL_Pop_front(this);
-    }
-}
-
-void SLL_Cursor_front( SLL* this ){
-    
-   this->cursor = this->first;
-}
-
-void SLL_Cursor_back( SLL* this ){
-    
-   this->cursor = this->last;
-}
-
-void SLL_Cursor_next( SLL* this ){
-    
-   if( this->cursor != NULL )
-   {
-      this->cursor = this->cursor->next;
-   }
-}
-
-bool   SLL_Find( SLL* this, Tipo key );
 
 //----------------------------------------------------------------------
 //  Operaciones AGENDA
 //----------------------------------------------------------------------
 
-Agenda* Agenda_new(){
-      
-      Agenda* lista = ( Agenda* ) malloc( sizeof( Agenda ) );
-      if( lista != NULL ) {
-          
-            lista->list_fechas= SLL_New();
-            lista->list_contactos = SLL_New();
-      }
-      
-      return lista;
-}
-
-void   Agenda_Delete( Agenda** this ){
-    
-    assert( *this );
-    fprintf(stderr,"Delete():Borrando Agenda\n");
-    Agenda_Make_empty(*this);
-    free(*this);
-    *this=NULL;
-}
-
-void   Agenda_add_date( Agenda* this, Fecha data );
-void   Agenda_add_contact(Agenda* this, Contacto data );
-
-bool   Agenda_Is_empty( SLL* this );
-void   Agenda_Make_empty( SLL* this );
-
-bool   Agenda_Find_fecha( SLL* this, Fecha key );
-bool   Agenda_Find_contacto( SLL* this, Contacto key );
-
-void    Print_Agenda( SLL* this )void DLL_PrintStructure( DLL* this ){
-    
-   if( Agenda_IsEmpty( this ) )
-   {
-      fprintf( stderr, "La agenda se encuentra vacía\n" );
+Agenda* Agenda_new() {      
+   Agenda* lista = ( Agenda* ) malloc( sizeof( Agenda ) );
+   if( lista != NULL ) {
+      lista->list_eventos= DLL_New();
+      lista->list_contactos = SLL_New();
    } 
-   else
-   {
-      for( Node* it = this->first; it != NULL; it = it->next )
-      {
-         fprintf( stderr, "(%d)->", it->datos );
-      } 
-      fprintf( stderr, "Nil\n" );
+      return lista;
+
+}
+
+void Agenda_Delete( Agenda** this ){
+   assert( *this );
+   fprintf(stderr,"Delete():Borrando Agenda\n");
+   Agenda_Make_empty(*this);
+   free(*this);
+   *this=NULL;
+
+}
+
+void Agenda_add_date( Agenda* this, Evento data ) {
+   DLL_Push_front( this->list_eventos, data  );
+
+}
+
+void Agenda_add_contact(Agenda* this, Contacto data ) {
+   SLL_Push_back(this->list_contactos, data);
+
+}
+
+bool Agenda_Is_empty( Agenda* this ) {
+   if( ( DLL_IsEmpty( this->list_eventos )== true ) && ( SLL_Is_empty( this->list_contactos )==true ) ) {
+      return true;
    }
+   else {
+      return false;
+   }
+}
+
+void Agenda_Make_empty( Agenda* this ) {
+   DLL_MakeEmpty(this->list_eventos);
+   SLL_Make_empty(this->list_contactos);
+}
+
+bool Agenda_Find_Event( Agenda* this, char key[MAX_EVENT] ) {
+   DLL_Find_Event_by_name(this->list_eventos, key);
+}
+
+bool Agenda_Find_contacto( Agenda* this, char key[MAX_CONTACTS] ) {
+   SLL_Find_by_name(this->list_contactos, key);
+}
+
+void Print_Agenda( Agenda* this ) {
+
+   DLL_PrintStructure(this->list_eventos);
+   SLL_PrintStructure(this->list_contactos);
+  
 }

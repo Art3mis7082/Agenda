@@ -1,10 +1,12 @@
-#ifndef MENU_H
-#define MENU_H
+#ifndef MENU_INC
+#define MENU_INC
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+
+#include "agenda.h"
 
 
 /**
@@ -12,7 +14,6 @@
  *
  */
 typedef int (*MenuAction)( void* );
-
 
 /**
  * @brief Define cada entrada del menú.
@@ -31,7 +32,6 @@ typedef struct {
    size_t     num_options; /**< Es el número de entradas del menú */
    char*      title;       /**< Título del menú para imprimir */
 } Menu;
-
 
 /**
  * @brief Crea un nuevo menú.
@@ -66,6 +66,16 @@ int Menu_Run( Menu* menu );
  * @return La opción que el usuario escogió.
  */
 int Menu_Show( Menu* menu );
+
+//------------------------------------------
+// Submenus
+//------------------------------------------
+
+// Esta función NO es una operación de algún ADT, es simplemente 
+// una función que recibe a un objeto tipo DummyClass para utilizarlo:
+int submenu_calendar ( DummyClass* obj );
+int submenu_contact( DummyClass* obj );
+int submenu_event( DummyClass* obj );
 
 
 #endif  // MENU_H
