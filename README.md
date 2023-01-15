@@ -11,4 +11,4 @@ Este proyecto tiene como finalidad, ser la base para una agenda digital que pued
 <img src="https://github.com/Art3mis7082/Agenda/blob/main/Agenda.PNG" width="300px" align="left">
 
 ### Instrucciones de compilación
-El primer paso es descargar el proyecto (puede ser en un zip, o abrirlo desde [Github desktop](https://desktop.github.com)) después en la terminal de la computadora insertar el comando `gcc main.c menu.c submenu.c Class.c -o ejecutable`. Esto hará que se genere el ejecutable del programa (no es un virus, se los prometo). Y después buscan el ejecutable generado en la carpeta project, y listo, ya tienen el programa base :smiley:
+El primer paso es descargar el proyecto (puede ser en un zip, o abrirlo desde [Github desktop](https://desktop.github.com)) después en la terminal de la computadora insertar el comando `gcc main.c menu.c agenda.c contactos.c fechas.c -o ejecutable`. Esto hará que se genere el ejecutable del programa (no es un virus, se los prometo). Y después buscan el ejecutable generado en la carpeta project, y listo, ya tienen el programa base :smiley:
