@@ -1,4 +1,4 @@
-#include<Agenda.h>
+#include'Agenda.h'
 //------------------------------
 //  Operaciones Lista Doblemente Enlazada
 //------------------------------
@@ -188,6 +188,20 @@ bool DLL_Find_Event_by_name( DLL* this, char key[MAX_EVENT] )
    return false;
 }
 
+bool DLL_Find_Event_by_date( DLL* this, char key[MAX_EVENT] )
+{
+   for( this->cursor = this->first; 
+        this->cursor != NULL; 
+        this->cursor = this->cursor->next )
+   {
+      if( this->cursor->datos.nombre == key )
+      {
+         return true;
+      }
+   }
+   return false;
+}
+
 void DLL_Cursor_front( DLL* this )
 {
    this->cursor = this->first;
@@ -195,7 +209,7 @@ void DLL_Cursor_front( DLL* this )
 
 void DLL_Cursor_back( DLL* this )
 {
-    this->cursor = this->first;
+    this->cursor = this->last;
 }
 
 void DLL_Cursor_next( DLL* this )
@@ -241,6 +255,87 @@ void DLL_PrintStructure( DLL* this )
       fprintf( stderr, "Nil\n" );
    }
 }
+DLL* DLL_Concat(DLL* list_1, DLL* list_2, int len){
+    DLL* list_3=DLL_New();
+    DLL_Cursor_front(list_1);
+    DLL_Cursor_back(list_2);
+    DLL_Cursor_front(list_3);
+    list_3->first=list_1->first;
+    list_3->last=list_2->last;
+    int cont=1;
+    if(cont < len/2){
+        DLL_Cursor_next(list_1);
+        list_3->cursor->next==list_1->cursor;
+        DLL_Cursor_next(list_3);
+        cont++;
+    }
+    if(cont < len){
+        DLL_Cursor_prev(list_2);
+        list_3->cursor->next==list_2->cursor;
+        DLL_Cursor_next(list_3);
+        cont++;
+    }
+    
+    DLL_Delete(&list_1);
+    DLL_Delete(&list_2);
+    return list_3;
+}
+
+void DLL_mergesort(DLL* arr, int len) {
+    
+  DLL_Cursor_front(arr);
+  DLL_Cursor_next(arr);
+  if (len == 1) { 
+      return; 
+  }
+  if (len == 2) {
+        if (arr->cursor->prev->datos.f.anio > arr->cursor->datos.f.anio) {
+             DLL_Push_front(arr, arr->cursor->datos);
+             DLL_Erase(arr);
+             
+             if(arr->cursor->prev->datos.f.mes > arr->cursor->datos.f.mes) {
+                DLL_Push_front(arr, arr->cursor->datos);
+                DLL_Erase(arr);
+                
+                if(arr->cursor->prev->datos.f.dia > arr->cursor->datos.f.dia) {
+                DLL_Push_front(arr, arr->cursor->datos);
+                DLL_Erase(arr);
+                }
+             }    
+        }
+  }
+
+  int p = len/2;
+  
+  DLL* arr1 = DLL_New();
+  int cont1=1;
+  arr1->first=arr->first;
+  DLL_Cursor_front(arr1);
+  while(cont1<p){
+        DLL_Cursor_next(arr1);
+        cont1++;
+      } 
+  arr1->last=arr1->cursor;
+    
+  DLL* arr2 = DLL_New();
+  int cont2=1;
+  arr2->last=arr->last;
+  DLL_Cursor_back(arr1);
+  while(cont2<p){
+        DLL_Cursor_prev(arr2);
+        cont2++;
+    } 
+  arr2->first=arr2->cursor;
+
+  DLL_mergesort(arr1, p);
+  DLL_mergesort(arr2, p);
+  arr=DLL_Concat(arr1,arr2,len);
+    
+}
+
+
+
+
 
 //------------------------------
 //  Operaciones Lista Enlazada
@@ -429,4 +524,5 @@ bool   Agenda_Find_contacto( Agenda* this, char key[MAX_CONTACTS] ){
 void    Print_Agenda( Agenda* this ){
         DLL_PrintStructure(this->list_eventos);
         SLL_PrintStructure(this->list_contactos);
+  
 }
