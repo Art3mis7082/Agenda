@@ -94,9 +94,6 @@ void Menu_Set_Title( Menu* menu, char* title ) {
 }
 
 
-#define MAX_CHAR 50
-#define MAX_NUM 20
-#define MAX_DAY 31
 
 //------------------------------------------
 // Submenús
@@ -138,7 +135,7 @@ static int suboption3( void* params ) {
 
    Agenda* object = (Agenda*) params;
 
-   char nombre[MAX_CHAR];
+   char nombre[MAX_CONTACTS];
    
    printf( "Soy la subopción de buscar contactos\n" );
 
@@ -176,7 +173,7 @@ static int suboption5( void* params ) {
 
    Agenda* object = (Agenda*) params;
 
-   char nombre[MAX_CHAR];
+   char nombre[MAX_EVENT];
    
    printf( "Soy la subopción de buscar evento\n" );
 
