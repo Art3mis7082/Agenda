@@ -71,7 +71,7 @@ print_pendings( void* params ) {
 
 int main_menu( DummyClass* obj ) {
     /*
-    * Observa que print_stock, insert_product y delete_product NO son objetos, son funciones 
+    * print_stock, insert_product y delete_product NO son objetos, son funciones 
     * que a su vez llamarían a las funciones del tipo abstracto (clase) correspondiente.
     */
     MenuEntry main_menu_entries[ MAIN_MENU_OPTIONS ] =

@@ -10,7 +10,7 @@
 static int suboption1( void* params ) {
    DummyClass* dummy_object = (DummyClass*) params;
 
-   printf( "Soy la sub opción 1: %d\n", DummyClass_Get( dummy_object ) );
+   printf( "Elige el día: %d\n", DummyClass_Get( dummy_object ) );
 
    return 1;
    // este valor es devuelto a la función llamadora (en este ejemplo, a delete_product()); ten cuidado
@@ -26,13 +26,46 @@ static int suboption2( void* params ) {
    // incluso puedes usar valores negativos.
 }
 
+static int suboption3( void* params ) {
+   printf( "Soy la sub opción 3\n" );
+
+   return 3;
+}
 
 
-#define SUBMENU1_OPTIONS 3
+
+#define SUBMENU1_OPTIONS 13
 
 // Esta función NO es una operación de algún ADT, es simplemente una función que recibe
 // a un objeto tipo DummyClass para utilizarlo:
 int submenu1( DummyClass* obj ) {
+   MenuEntry submenu1_entries[ SUBMENU1_OPTIONS ] =
+   {
+      { "Salir", NULL },
+      { "Enero", suboption1, (void*)obj },
+      { "Febrero", suboption1, (void*)obj },
+      { "Marzo", suboption1, (void*)obj },
+      { "Abril", suboption1, (void*)obj },
+      { "Mayo", suboption1, (void*)obj },
+      { "Junio", suboption1, (void*)obj },
+      { "Julio", suboption1, (void*)obj },
+      { "Agosto", suboption1, (void*)obj },
+      { "Septiembre", suboption1, (void*)obj },
+      { "Octubre", suboption1, (void*)obj },
+      { "Noviembre", suboption1, (void*)obj },
+      { "Diciembre", suboption1, (void*)obj },
+   };
+
+   Menu* menu = Menu_New( submenu1_entries, SUBMENU1_OPTIONS, "Elige el mes" );
+
+   int ret_val = Menu_Run( menu );
+
+   Menu_Delete( &menu );
+
+   return ret_val;
+}
+
+int submenu2( DummyClass* obj ) {
    MenuEntry submenu1_entries[ SUBMENU1_OPTIONS ] =
    {
       { "Salir", NULL },
@@ -49,7 +82,7 @@ int submenu1( DummyClass* obj ) {
    return ret_val;
 }
 
-int submenu2( DummyClass* obj ) {
+int submenu3( DummyClass* obj ) {
    MenuEntry submenu1_entries[ SUBMENU1_OPTIONS ] =
    {
       { "Salir", NULL },

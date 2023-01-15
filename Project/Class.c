@@ -7,8 +7,7 @@
 
 DummyClass* DummyClass_New() {
    DummyClass* d = malloc( sizeof( DummyClass ) );
-   if( d )
-   {
+   if( d ) {
       d->some_var = 0;
    }
 

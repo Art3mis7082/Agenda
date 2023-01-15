@@ -40,7 +40,6 @@ void Menu_Delete( Menu** menu ) {
 }
  
 
-
 int Menu_Run( Menu* menu ) {
    assert( menu );
 
@@ -56,7 +55,6 @@ int Menu_Run( Menu* menu ) {
 
    }
 }
-
 
 
 void Menu_Set( Menu* menu, MenuEntry* options, size_t num_options, char* title ) {

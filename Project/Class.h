@@ -3,8 +3,7 @@
 
 #include <stdlib.h>
 
-typedef struct
-{
+typedef struct {
    int some_var;
 } DummyClass;
 

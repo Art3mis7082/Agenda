@@ -17,8 +17,7 @@ typedef int (*MenuAction)( void* );
 /**
  * @brief Define cada entrada del menú.
  */
-typedef struct 
-{
+typedef struct {
    char       text[ 80 ]; /**< Texto del menú */
    MenuAction action;     /**< Acción a realizar cuando se escoja esta entrada @see MenuAction */
    void*      params;     /**< Parámetro opcional (genérico) */
@@ -27,8 +26,7 @@ typedef struct
 /**
  * @brief Clase Menú.
  */
-typedef struct
-{
+typedef struct {
    MenuEntry* options;     /**< Arreglo de entradas del menú. @see MenuEntry */
    size_t     num_options; /**< Es el número de entradas del menú */
    char*      title;       /**< Título del menú para imprimir */
@@ -53,6 +51,11 @@ Menu* Menu_New( MenuEntry* options, size_t num_options, char* title );
  */
 void Menu_Delete( Menu** menu );
 
+/**
+ * @brief 'Corre' el menú
+ * @param menu Objeto Menú 
+ * @return Regresa la opción elegida en cada paso
+ */
 int Menu_Run( Menu* menu );
 
 /**
