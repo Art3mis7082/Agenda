@@ -107,13 +107,5 @@ int main() {
     do{;}while( main_menu( an_object ) != 0 );
     // inicia el procesamiento de los menús y le pasamos al objeto principal
 
-    // también funciona:
-    /*
-    while( main_menu( an_object ) != 0 )
-    {
-        ;
-    }
-    */
-
     DummyClass_Delete( &an_object );
 }

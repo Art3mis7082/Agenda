@@ -7,8 +7,7 @@
 // el siguiente par de funciones son privadas, por lo tanto NO requieren
 // prototipos (están marcadas como "static", que en C significan privadas al módulo).
 
-static int suboption1( void* params )
-{
+static int suboption1( void* params ) {
    DummyClass* dummy_object = (DummyClass*) params;
 
    printf( "Soy la sub opción 1: %d\n", DummyClass_Get( dummy_object ) );
@@ -19,8 +18,7 @@ static int suboption1( void* params )
 }
 
 // esta función no utiliza los parámetros
-static int suboption2( void* params )
-{
+static int suboption2( void* params ) {
    printf( "Soy la sub opción 2\n" );
 
    return 2;
@@ -34,8 +32,24 @@ static int suboption2( void* params )
 
 // Esta función NO es una operación de algún ADT, es simplemente una función que recibe
 // a un objeto tipo DummyClass para utilizarlo:
-int submenu1( DummyClass* obj )
-{
+int submenu1( DummyClass* obj ) {
+   MenuEntry submenu1_entries[ SUBMENU1_OPTIONS ] =
+   {
+      { "Salir", NULL },
+      { "Subopción 1", suboption1, (void*)obj },
+      { "Subopción 2", suboption2, NULL },
+   };
+
+   Menu* menu = Menu_New( submenu1_entries, SUBMENU1_OPTIONS, "SUBMENÚ 1" );
+
+   int ret_val = Menu_Run( menu );
+
+   Menu_Delete( &menu );
+
+   return ret_val;
+}
+
+int submenu2( DummyClass* obj ) {
    MenuEntry submenu1_entries[ SUBMENU1_OPTIONS ] =
    {
       { "Salir", NULL },
