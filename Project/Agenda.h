@@ -1,5 +1,5 @@
-#ifndef AGENDA
-#define AGENDA
+#ifndef AGENDA_INC
+#define AGENDA_INC
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,8 +65,7 @@ typedef struct
 	Node* last;
 	Node* cursor;
 	size_t len;
-} DLL;
-
+} DLL
 
 DLL* DLL_New();
 void DLL_Delete( DLL** this );
@@ -129,7 +128,6 @@ void   SLL_Cursor_back(  SLL* this );
 void   SLL_Cursor_next(  SLL* this );
 bool   SLL_Find_if(      SLL* this, int key );
 bool   SLL_Find(         SLL* this, int key );
-
 //----------------------------------------------------------------------
 //  AGENDA
 //----------------------------------------------------------------------

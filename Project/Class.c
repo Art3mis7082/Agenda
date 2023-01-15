@@ -5,8 +5,7 @@
 #include "Class.h"
 
 
-DummyClass* DummyClass_New()
-{
+DummyClass* DummyClass_New() {
    DummyClass* d = malloc( sizeof( DummyClass ) );
    if( d )
    {
@@ -16,23 +15,19 @@ DummyClass* DummyClass_New()
    return d;
 }
 
-void DummyClass_Delete( DummyClass** d )
-{
+void DummyClass_Delete( DummyClass** d ) {
    free( *d );
    *d = NULL;
 }
 
-void DummyClass_Print( DummyClass* d )
-{
-   printf( "some_var=%d\n", d->some_var );
+void DummyClass_Print( DummyClass* d ) {
+   printf( "some_var = %d\n", d->some_var );
 }
 
-void DummyClass_Set( DummyClass* d, int new_val )
-{
+void DummyClass_Set( DummyClass* d, int new_val ) {
    d->some_var = new_val;
 }
 
-int DummyClass_Get( DummyClass* d )
-{
+int DummyClass_Get( DummyClass* d ) {
    return d->some_var;
 }

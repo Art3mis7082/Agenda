@@ -1,9 +1,8 @@
-#include<Agenda.h>
+#include "Agenda.h"
 //------------------------------
 //  Operaciones Lista Enlazada
 //------------------------------
-static Node* new_Node( Tipo data )
-{
+static Node* new_Node( Tipo data ) {
    Node* n = (Node*) malloc( sizeof( Node ) );
    if( n ){
       n->data = x;
@@ -11,17 +10,17 @@ static Node* new_Node( Tipo data )
    }
    return n;
 }
-SLL*   SLL_New(){
+SLL* SLL_New() {
     
     SLL* sll= (SLL*) malloc(sizeof(SLL));
-    if(sll !=NULL){
+    if( sll !=NULL ) {
         fprintf(stderr,"New():Creando una lista nueva\n");
         sll->first=sll->last=sll->cursor=NULL;
         sll->len=0;
     }
 }
 
-void   SLL_Delete( SLL** this ){
+void SLL_Delete( SLL** this ) {
     
     assert( *this );
     fprintf(stderr,"Delete():Borrando la lista\n");
@@ -30,7 +29,7 @@ void   SLL_Delete( SLL** this ){
     *this=NULL;
 }
 
-void   SLL_Push_back( SLL* this, Tipo data ){
+void SLL_Push_back( SLL* this, Tipo data ){
     
    Node* n = newNode( data );
    if( n )
