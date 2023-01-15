@@ -118,15 +118,14 @@ static int suboption1( void* params ) {
 // esta función no utiliza los parámetros
 static int suboption2( void* params ) {
 
-   char nombre[MAX_CHAR];
-   int numero[MAX_NUM];
+   Contacto* n_c;
 
    printf( "Soy la subopción de crear contactos\n" );
 
    printf( "Introduce el nombre del contacto: ");
-   scanf( " %ld ", nombre);
+   scanf( " %ld ", c_n->contact_name);
    printf( "Introduce su número de teléfono ");
-   scanf( " %ld ", numero);
+   scanf( " %ld ", c_n->phone_number);
 
    Agenda_add_contact( nombre, numero );
 
@@ -155,17 +154,20 @@ static int suboption3( void* params ) {
 static int suboption4( void* params ) {
    Agenda* object = (Agenda*) params;
 
-   char nombre[MAX_CHAR];
-   int dia[MAX_DAY];
+   Evento* n_e;
 
    printf( "Soy la subopción de crear eventos\n" );
 
    printf( "Introduce el nombre del evento: ");
-   scanf( " %ld ", nombre);
+   scanf( " %ld ", n_e->nombre);
    printf( "Introduce el dia ");
-   scanf( " %ld ", dia);
+   scanf( " %ld ", n_e->f.dia);
+   printf( "Introduce el numero de mes ");
+   scanf( " %ld ", n_e->f.mes);
+   printf( "Introduce el año ");
+   scanf( " %ld ", n_e->f.anio);
 
-   Agenda_add_date()
+   Agenda_add_date(params, n_e-);
 
    return 3;
 }
@@ -174,7 +176,7 @@ static int suboption5( void* params ) {
 
    Agenda* object = (Agenda*) params;
 
-   char nombre[MAX_CHAR];
+   char nombre[MAX_EVENT];
    
    printf( "Soy la subopción de buscar evento\n" );
 
@@ -259,10 +261,10 @@ int submenu_event( DummyClass* obj ) {
    MenuEntry submenu_event_entries[ SUBMENU3_OPTIONS ] =
    {
       { "Salir", NULL },
-      { "Crear evento", suboption5, (void*)obj },
+      { "Crear evento", suboption4, (void*)obj },
       { "Eliminar evento", suboption6, (void*)obj },
-      { "Ver eventos", suboption3, (void*)obj },
-      { "Acomodar eventos", suboption3, (void*)obj },
+      { "Ver eventos", suboption6, (void*)obj },
+      { "Buscar eventos", suboption5, (void*)obj },
 
    };
 
