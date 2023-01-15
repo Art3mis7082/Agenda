@@ -10,7 +10,7 @@ To see this file on Spanish click [here](https://github.com/Art3mis7082/Agenda/b
 This project have the purpose to be a digital diary that can be personalized as the client's needs. Also have the objective to use data structures and algorithms seen on the semester. We used language C, and most of all of the functions are documented with doxygen.
 For now it has the visualize of the calendar and events, create and delete contacts and events and it works only for the present year: 2023.
 
-<img src="https://github.com/Art3mis7082/Agenda/blob/main/Agenda.PNG" width="300px" align="left">
+<img src="https://github.com/Art3mis7082/Agenda/blob/main/Agenda.PNG" width="380px" align="left">
 
 ### Compilation steps
 
