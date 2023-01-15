@@ -297,8 +297,8 @@ void DLL_mergesort(DLL* arr, int len) {
    arr1->first=arr->first;
    DLL_Cursor_front(arr1);
    while(cont1<p) {
-    DLL_Cursor_next(arr1);
-    cont1++;
+      DLL_Cursor_next(arr1);
+      cont1++;
    } 
    arr1->last=arr1->cursor;
     
@@ -307,8 +307,8 @@ void DLL_mergesort(DLL* arr, int len) {
    arr2->last=arr->last;
    DLL_Cursor_back(arr1);
    while(cont2<p) {
-    DLL_Cursor_prev(arr2);
-    cont2++;
+      DLL_Cursor_prev(arr2);
+      cont2++;
    } 
    arr2->first=arr2->cursor;
 

@@ -71,8 +71,8 @@ int Menu_Show( Menu* menu );
 // Submenus
 //------------------------------------------
 
-// Esta función NO es una operación de algún ADT, es simplemente 
-// una función que recibe a un objeto tipo DummyClass para utilizarlo:
+// Estas funciones NO son una operación de algún ADT, es simplemente 
+// son funciones que reciben a un objeto tipo DummyClass para utilizarlo:
 int submenu_calendar ( DummyClass* obj );
 int submenu_contact( DummyClass* obj );
 int submenu_event( DummyClass* obj );
