@@ -1,7 +1,7 @@
 # Agenda personalizable
 Proyecto para EDA 1, semestre 2023-1
 
-To see this file on English click [here] ( )
+To see this file on English click [here](https://github.com/Art3mis7082/Agenda/blob/main/READMEeng.md)
 
 > Disclaimer: Este proyecto no tiene todas las características implementadas, funge como un proyecto base en constante mejora.
 
